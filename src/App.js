@@ -5,9 +5,6 @@ import ReactDOM from "react-dom";
 import shuffle from "shuffle-array";
 import "./App.css";
 import { start } from "./confetti.js";
-import easter1 from "./images/easter1.jpeg"
-import easter2 from "./images/easter2.jpeg"
-import easter3 from "./images/easter3.jpeg"
 import easter4 from "./images/easter4.PNG"
 import easter5 from "./images/easter5.PNG"
 import easter6 from "./images/easter6.PNG"
