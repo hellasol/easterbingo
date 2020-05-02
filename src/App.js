@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button } from "reactstrap";
 
 import ReactDOM from "react-dom";
 import shuffle from "shuffle-array";
 import "./App.css";
 import { start } from "./confetti.js";
-import easter4 from "./images/easter4.PNG"
-import easter5 from "./images/easter5.PNG"
-import easter6 from "./images/easter6.PNG"
-import easter7 from "./images/easter7.PNG"
-
-
+import easter4 from "./images/easter4.PNG";
+import easter5 from "./images/easter5.PNG";
+import easter6 from "./images/easter6.PNG";
+import easter7 from "./images/easter7.PNG";
 
 function Confetti() {
   useEffect(() => {
@@ -52,7 +50,7 @@ const bbb = [
   "23: Førstemann til å si en vits",
   "24: I hvilket land kan man ikke kjøpe cola",
   "25: Hvilket tau kan du ikke dra i?",
-  "26: Hvor mange er smittet i Norge?"
+  "26: Hvor mange er smittet i Norge?",
 ];
 
 const data = shuffle(bbb).reduce(
@@ -62,39 +60,49 @@ const data = shuffle(bbb).reduce(
 
 export default function App() {
   const [state, setState] = useState({ checked: {} });
-  const isWon = checked => {
+  const isWon = (checked) => {
     const range = [0, 1, 2, 3, 4];
     return (
       undefined !==
-        range.find(row => range.every(column => checked[row * 5 + column])) ||
+        range.find((row) =>
+          range.every((column) => checked[row * 5 + column])
+        ) ||
       undefined !==
-        range.find(column => range.every(row => checked[row * 5 + column])) ||
-      range.every(index => checked[index * 5 + index]) ||
-      range.every(index => checked[index * 5 + 4 - index])
+        range.find((column) =>
+          range.every((row) => checked[row * 5 + column])
+        ) ||
+      range.every((index) => checked[index * 5 + index]) ||
+      range.every((index) => checked[index * 5 + 4 - index])
     );
   };
-  const toggle = id =>
-    setState(state => {
+  const toggle = (id) =>
+    setState((state) => {
       const checked = { ...state.checked, [id]: !state.checked[id] };
       const won = isWon(checked);
       return {
         ...state,
         checked,
-        won
+        won,
       };
     });
 
   return (
     <div className="App">
       <div className="header">
-      <Row>
-       <Col ><img src={easter4} size="200px"alt="Logo"/></Col>
-      <Col ><h1 className="headline">Solveig og Tomas sin Påske Bingo!</h1> </Col>
-      <Col ><img src={easter7} alt="Logo"/></Col>
-      </Row>
+        <Row>
+          <Col>
+            <img src={easter4} size="200px" alt="Logo" />
+          </Col>
+          <Col>
+            <h1 className="headline">Solveig og Tomas sin Påske Bingo!</h1>{" "}
+          </Col>
+          <Col>
+            <img src={easter7} alt="Logo" />
+          </Col>
+        </Row>
       </div>
       <div className="wrapper">
-        {Object.keys(data).map(id => (
+        {Object.keys(data).map((id) => (
           <Tile
             key={id}
             id={id}
@@ -106,7 +114,6 @@ export default function App() {
         ))}
       </div>
       {state.won ? <Confetti /> : null}
-
     </div>
   );
 }
